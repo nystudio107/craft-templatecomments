@@ -2,7 +2,7 @@
 
 # Template Comments plugin for Craft CMS 3.x
 
-Adds a HTML comment to demarcate `{% block %}`s and each Twig template that is included or extended.
+Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.
 
 ![Screenshot](resources/img/plugin-logo.png)
 
@@ -29,6 +29,8 @@ You can also install Template Comments via the **Plugin Store** in the Craft Adm
 ## Template Comments Overview
 
 Template Comments is a debugging tool that wraps your Twig `{% block %}`s and templates that you `{% include %}` with HTML comments. By default, it does this only when `devMode` is on.
+
+It also records performance data, so you know how much overhead each `{% block %}` or `{% include %}` is adding.
 
 With more complicated "content builder" setups, this can help bring clarity to where the various HTML on your pages is coming from.
 
@@ -74,6 +76,11 @@ return [
 ## Using Template Comments
 
 Nothing much to say here; install the plugin, and it "just works". If `devMode` is off, it doesn't even install itself, so there should be zero effect in production.
+
+The `<<< END <<<` comments all include performance data in milliseconds, e.g.:
+```html
+<!-- 22.34ms <<< TEMPLATE END <<< templatecomments/_layout.twig -->
+```
 
 ## Template Comments Roadmap
 
