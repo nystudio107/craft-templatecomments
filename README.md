@@ -50,12 +50,12 @@ return [
     /**
      * @var bool Whether comments should be generated for AdminCP templates
      */
-    'cpTemplateComments' => false,
+    'cpTemplateComments' => true,
 
     /**
      * @var bool Whether to generate comments only when `devMode` is on
      */
-    'onlyCommentsInDevMode' => false,
+    'onlyCommentsInDevMode' => true,
 
     /**
      * @var bool Whether or not to show comments for templates that are include'd
