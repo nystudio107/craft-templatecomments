@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/quality-score.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v1) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/coverage.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v1) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/build.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/build-status/v1) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/code-intelligence.svg?b=v1)](https://scrutinizer-ci.com/code-intelligence)
+
 # Template Comments plugin for Craft CMS 3.x
 
 Adds a HTML comment to demarcate `{% block %}`s and each Twig template that is included or extended.
