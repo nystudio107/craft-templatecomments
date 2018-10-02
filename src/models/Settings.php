@@ -31,7 +31,7 @@ class Settings extends Model
     /**
      * @var bool Whether comments should be generated for AdminCP templates
      */
-    public $cpTemplateComments = true;
+    public $cpTemplateComments = false;
 
     /**
      * @var bool Whether to generate comments only when `devMode` is on
