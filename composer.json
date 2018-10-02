@@ -4,11 +4,11 @@
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
-        "craft",
-        "cms",
         "craftcms",
         "craft-plugin",
-        "template comments"
+        "twig",
+        "comments",
+        "debugging"
     ],
     "support": {
         "docs": "https://github.com/nystudio107/craft-templatecomments/blob/v1/README.md",
