@@ -24,7 +24,6 @@ class CommentsNode extends \Twig_Node
             ->indent()
             ->subcompile($this->getNode('body'))
             ->outdent()
-            ->raw(";\n")
             ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_templateTimer)*1000,2)."ms <<< TEMPLATE END <<< ".$_templateName." -->".PHP_EOL')
             ->raw(";\n")
             ->write("unset(\$_templateName);\n")

@@ -20,6 +20,7 @@ namespace nystudio107\templatecomments\web\twig\nodes;
 class CommentBlockNode extends \Twig_Node_Block
 {
     private $blockName;
+    private $excludeBlocks = ['attr'];
 
     public function __construct($name, \Twig_Node $body, $lineno, $tag = null)
     {
@@ -33,22 +34,28 @@ class CommentBlockNode extends \Twig_Node_Block
             ->addDebugInfo($this)
             ->write(sprintf("public function block_%s(\$context, array \$blocks = array())\n", $this->getAttribute('name')), "{\n")
             ->indent()
-            ->write('$_blockTimer = microtime(true)')
-            ->raw(";\n")
-            ->write('$_blockName = ')
-            ->write("'".$this->blockName."'")
-            ->raw(";\n")
-            ->write('echo PHP_EOL."<!-- >>> BLOCK BEGIN >>> ".$_blockName." -->".PHP_EOL')
-            ->raw(";\n")
-        ;
-
+            ;
+        if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
+            $compiler
+                ->write('$_blockTimer = microtime(true)')
+                ->raw(";\n")
+                ->write('$_blockName = ')
+                ->write("'".$this->blockName."'")
+                ->raw(";\n")
+                ->write('echo PHP_EOL."<!-- >>> BLOCK BEGIN >>> ".$_blockName." -->".PHP_EOL')
+                ->raw(";\n");
+        }
         $compiler
             ->subcompile($this->getNode('body'))
             ->outdent()
-            ->raw(";\n")
-            ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_blockTimer)*1000,2)."ms <<< BLOCK END <<< ".$_blockName." -->".PHP_EOL')
-            ->raw(";\n")
-            ->write("unset(\$_blockName);\n")
+            ;
+        if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
+            $compiler
+                ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_blockTimer)*1000,2)."ms <<< BLOCK END <<< ".$_blockName." -->".PHP_EOL')
+                ->raw(";\n")
+                ->write("unset(\$_blockName);\n");
+        }
+        $compiler
             ->write("}\n\n")
         ;
     }
