@@ -14,6 +14,8 @@ class CommentsNode extends \Twig_Node
     {
         $compiler
             ->addDebugInfo($this)
+            ->write('$_templateTimer = microtime(true)')
+            ->raw(";\n")
             ->write('$_templateName = ')
             ->subcompile($this->getNode('templateName'))
             ->raw(";\n")
@@ -23,8 +25,10 @@ class CommentsNode extends \Twig_Node
             ->subcompile($this->getNode('body'))
             ->outdent()
             ->raw(";\n")
-            ->write('echo PHP_EOL."<!-- <<< TEMPLATE END <<< ".$_templateName." -->".PHP_EOL')
+            ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_templateTimer)*1000,2)."ms <<< TEMPLATE END <<< ".$_templateName." -->".PHP_EOL')
             ->raw(";\n")
-            ->write("unset(\$_templateName);\n");
+            ->write("unset(\$_templateName);\n")
+            ->write("unset(\$_templateTimer);\n")
+        ;
     }
 }
