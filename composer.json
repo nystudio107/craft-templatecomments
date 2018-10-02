@@ -1,0 +1,40 @@
+{
+    "name": "nystudio107/craft-templatecomments",
+    "description": "Adds a HTML comment to demarcate `{% block %}`s and each Twig template that is included or extended.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "template comments"
+    ],
+    "support": {
+        "docs": "https://github.com/nystudio107/craft-templatecomments/blob/v1/README.md",
+        "issues": "https://github.com/nystudio107/craft-templatecomments/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nystudio107",
+            "homepage": "https://nystudio107.com/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "nystudio107\\templatecomments\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Template Comments",
+        "handle": "templatecomments",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-templatecomments/v1/CHANGELOG.md",
+        "class": "nystudio107\\templatecomments\\TemplateComments"
+    }
+}
