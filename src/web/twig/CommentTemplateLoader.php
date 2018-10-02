@@ -19,8 +19,10 @@ class CommentTemplateLoader extends TemplateLoader
             throw new TemplateLoaderException($name, Craft::t('app', 'Tried to read the template at {path}, but could not. Check the permissions.', ['path' => $template]));
         }
 
-        $prefix = "{% comments '{$name}' %}".PHP_EOL;
+        $escapedName = addslashes($name);
+        $prefix = "{% comments '{$escapedName}' %}".PHP_EOL;
         $suffix = PHP_EOL."{% endcomments %}";
+
         return new \Twig_Source($prefix.file_get_contents($template).$suffix, $name, $template);
     }
 
