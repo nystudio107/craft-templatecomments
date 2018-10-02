@@ -30,7 +30,7 @@ Template Comments is a debugging tool that wraps your Twig `{% block %}`s and te
 
 With more complicated "content builder" setups, this can help bring clarity to where the various HTML on your pages is coming from.
 
-This can be especially handy when dealing with OPC (Other People's Code).
+This can be especially handy when dealing with OPC (Other People's Code). It solves [this problem](https://craftcms.stackexchange.com/questions/27769/how-can-i-print-the-name-of-every-template-being-rendered-in-html-comments-when).
 
 ![Screenshot](resources/screenshots/templatecomments-example.png)
 
