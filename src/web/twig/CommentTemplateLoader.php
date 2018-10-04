@@ -1,4 +1,12 @@
 <?php
+/**
+ * Template Comments plugin for Craft CMS 3.x
+ *
+ * Adds a HTML comment to demarcate each Twig template that is included or extended.
+ *
+ * @link      https://nystudio107.com/
+ * @copyright Copyright (c) 2018 nystudio107
+ */
 
 namespace nystudio107\templatecomments\web\twig;
 
@@ -6,6 +14,11 @@ use Craft;
 use craft\web\twig\TemplateLoader;
 use craft\web\twig\TemplateLoaderException;
 
+/**
+ * @author    nystudio107
+ * @package   TemplateComments
+ * @since     1.0.0
+ */
 class CommentTemplateLoader extends TemplateLoader
 {
     /**
@@ -30,11 +43,7 @@ class CommentTemplateLoader extends TemplateLoader
     // =========================================================================
 
     /**
-     * Returns the path to a given template, or throws a TemplateLoaderException.
-     *
-     * @param string $name
-     * @return string
-     * @throws TemplateLoaderException if the template doesn’t exist
+     * @inheritdoc
      */
     private function _resolveTemplate(string $name): string
     {

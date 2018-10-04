@@ -192,11 +192,25 @@ class TemplateComments extends Plugin
                 View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
                 function (TemplateEvent $event) {
                     $view = Craft::$app->getView();
-                    if (self::$settings->templateCommentsEnabled) {
+                    if ($this->enabledForTemplate($event->template)) {
                         $view->getTwig()->setLoader(new CommentTemplateLoader($view));
                     }
                 }
             );
         }
+    }
+
+    /**
+     * Is template parsing enabled for this template?
+     *
+     * @param string $templateName
+     *
+     * @return bool
+     */
+    private function enabledForTemplate(string $templateName): bool
+    {
+        $ext = pathinfo($templateName, PATHINFO_EXTENSION);
+        return (self::$settings->templateCommentsEnabled
+            && \in_array($ext, self::$settings->allowedTemplateSuffixes, false));
     }
 }
