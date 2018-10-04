@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.0.2 - 2018-10-04
+### Changed
+* Only parse templates that end in `.twig`, `.htm`, `.html` or that have no extension
+
 ## 1.0.1 - 2018-10-02
 ### Added
 * Added performance timings to the `<<< END <<<` comments
