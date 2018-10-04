@@ -48,6 +48,16 @@ class Settings extends Model
      */
     public $blockCommentsEnabled = true;
 
+    /**
+     * @var array Template file suffixes that Template Comments should be enabled for
+     */
+    public $allowedTemplateSuffixes = [
+        '',
+        'twig',
+        'htm',
+        'html'
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -67,6 +77,12 @@ class Settings extends Model
                     'blockCommentsEnabled',
                 ],
                 'boolean'
+            ],
+            [
+                [
+                    'allowedTemplateSuffixes',
+                ],
+                ArrayValidator::class
             ],
         ];
     }

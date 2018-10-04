@@ -50,4 +50,14 @@ return [
      * @var bool Whether or not to show comments for `{% block %}`s
      */
     'blockCommentsEnabled' => true,
+
+    /**
+     * @var array Template file suffixes that Template Comments should be enabled for
+     */
+    'allowedTemplateSuffixes' => [
+        '',
+        'twig',
+        'htm',
+        'html',
+    ],
 ];
