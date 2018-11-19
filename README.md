@@ -24,7 +24,7 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Template Comments.
 
-You can also install Template Comments via the **Plugin Store** in the Craft AdminCP.
+You can also install Template Comments via the **Plugin Store** in the Craft Control Panel.
 
 ## Template Comments Overview
 
@@ -52,7 +52,7 @@ return [
     'siteTemplateComments' => true,
 
     /**
-     * @var bool Whether comments should be generated for AdminCP templates
+     * @var bool Whether comments should be generated for Control Panel templates
      */
     'cpTemplateComments' => false,
 
