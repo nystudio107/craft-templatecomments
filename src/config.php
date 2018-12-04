@@ -32,7 +32,7 @@ return [
     'siteTemplateComments' => true,
 
     /**
-     * @var bool Whether comments should be generated for AdminCP templates
+     * @var bool Whether comments should be generated for Control Panel templates
      */
     'cpTemplateComments' => false,
 

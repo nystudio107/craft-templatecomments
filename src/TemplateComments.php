@@ -92,7 +92,7 @@ class TemplateComments extends Plugin
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             $this->installSiteComponents();
         }
-        // Install only for non-console AdminCP requests
+        // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             $this->installCpComponents();
         }
@@ -110,7 +110,7 @@ class TemplateComments extends Plugin
     }
 
     /**
-     * Install components for AdminCP requests only
+     * Install components for Control Panel requests only
      */
     protected function installCpComponents()
     {
@@ -129,7 +129,7 @@ class TemplateComments extends Plugin
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             $this->installSiteEventListeners();
         }
-        // Install only for non-console AdminCP requests
+        // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             $this->installCpEventListeners();
         }
@@ -146,7 +146,7 @@ class TemplateComments extends Plugin
     }
 
     /**
-     * Install site event listeners for AdminCP requests only
+     * Install site event listeners for Control Panel requests only
      */
     protected function installCpEventListeners()
     {

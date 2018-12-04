@@ -29,7 +29,7 @@ class Settings extends Model
     public $siteTemplateComments = true;
 
     /**
-     * @var bool Whether comments should be generated for AdminCP templates
+     * @var bool Whether comments should be generated for Control Panel templates
      */
     public $cpTemplateComments = false;
 
