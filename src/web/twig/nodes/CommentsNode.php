@@ -2,7 +2,8 @@
 /**
  * Template Comments plugin for Craft CMS 3.x
  *
- * Adds a HTML comment to demarcate each Twig template that is included or extended.
+ * Adds a HTML comment to demarcate each Twig template that is included or
+ * extended.
  *
  * @link      https://nystudio107.com/
  * @copyright Copyright (c) 2018 nystudio107
@@ -34,9 +35,16 @@ class CommentsNode extends \Twig_Node
             ->raw(";\n")
             ->write('echo PHP_EOL."<!-- >>> TEMPLATE BEGIN >>> ".$_templateName." -->".PHP_EOL')
             ->raw(";\n")
-            ->indent()
-            ->subcompile($this->getNode('body'))
-            ->outdent()
+        ;
+        // Make sure there is a body node
+        if (!empty($this->nodes['body'])) {
+            $compiler
+                ->indent()
+                ->subcompile($this->getNode('body'))
+                ->outdent()
+            ;
+        }
+        $compiler
             ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_templateTimer)*1000,2)."ms <<< TEMPLATE END <<< ".$_templateName." -->".PHP_EOL')
             ->raw(";\n")
             ->write("unset(\$_templateName);\n")
