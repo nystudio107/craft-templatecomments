@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.0.3 - 2018-12-04
+### Changed
+* Fixed an issue that could result in a compile error if the `CommentsNode` had no `body`
+
 ## 1.0.2 - 2018-10-04
 ### Changed
 * Only parse templates that end in `.twig`, `.htm`, `.html` or that have no extension
