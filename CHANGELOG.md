@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.0.4 - 2019-01-22
+### Changed
+* Do nothing at all on AJAX requests
+
 ## 1.0.3 - 2018-12-04
 ### Changed
 * Fixed an issue that could result in a compile error if the `CommentsNode` had no `body`
