@@ -88,17 +88,19 @@ class TemplateComments extends Plugin
     protected function addComponents()
     {
         $request = Craft::$app->getRequest();
-        // Do nothing at all on AJAX requests
-        if ($request->isAjax) {
-            return;
-        }
-        // Install only for non-console site requests
-        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            $this->installSiteComponents();
-        }
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            $this->installCpComponents();
+        if (!$request->getIsConsoleRequest()) {
+            // Do nothing at all on AJAX requests
+            if ($request->isAjax) {
+                return;
+            }
+            // Install only for site requests
+            if ($request->getIsSiteRequest()) {
+                $this->installSiteComponents();
+            }
+            // Install only for Control Panel requests
+            if ($request->getIsCpRequest()) {
+                $this->installCpComponents();
+            }
         }
     }
 
