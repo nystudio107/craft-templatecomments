@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.0.5 - 2019-01-25
+### Changed
+* Fixed a regression that caused it to throw an exception on console requests
+
 ## 1.0.4 - 2019-01-22
 ### Changed
 * Do nothing at all on AJAX requests
