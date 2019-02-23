@@ -44,6 +44,11 @@ class TemplateComments extends Plugin
      */
     public static $settings;
 
+    /**
+     * @var \Twig_LoaderInterface
+     */
+    public static $originalTwigLoader;
+
     // Public Properties
     // =========================================================================
 
@@ -179,6 +184,8 @@ class TemplateComments extends Plugin
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         if (!self::$settings->onlyCommentsInDevMode
             || (self::$settings->onlyCommentsInDevMode && $devMode)) {
+            $view = Craft::$app->getView();
+            self::$originalTwigLoader = $view->getTwig()->getLoader();
             Craft::$app->view->registerTwigExtension(new CommentsTwigExtension());
         }
     }
