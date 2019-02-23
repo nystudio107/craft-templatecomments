@@ -14,6 +14,8 @@ use nystudio107\templatecomments\TemplateComments;
 use nystudio107\templatecomments\web\twig\tokenparsers\CommentsTokenParser;
 use nystudio107\templatecomments\web\twig\tokenparsers\CommentBlockTokenParser;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   TemplateComments
@@ -35,6 +37,16 @@ class CommentsTwigExtension extends \Twig_Extension
     /**
      * @inheritdoc
      */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_Function('source', [$this, 'originalSource'], ['needs_environment' => true, 'is_safe' => ['all']]),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getTokenParsers(): array
     {
         $parsers = [];
@@ -46,5 +58,26 @@ class CommentsTwigExtension extends \Twig_Extension
         }
 
         return $parsers;
+    }
+
+    /**
+     * Returns a template content without rendering it.
+     *
+     * @param \Twig_Environment $env
+     * @param string           $name          The template name
+     * @param bool             $ignoreMissing Whether to ignore missing templates or not
+     *
+     * @return string The template source
+     */
+    function originalSource($env, $name, $ignoreMissing = false)
+    {
+        $loader = TemplateComments::$originalTwigLoader;
+        try {
+            return $loader->getSourceContext($name)->getCode();
+        } catch (\Twig_Error_Loader $e) {
+            if (!$ignoreMissing) {
+                throw $e;
+            }
+        }
     }
 }

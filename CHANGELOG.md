@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.0.6 - 2019-02-23
+### Changed
+* Fixed an issue that caused unparsed tags to be generated for Twig's `source()` function
+
 ## 1.0.5 - 2019-01-25
 ### Changed
 * Fixed a regression that caused it to throw an exception on console requests
