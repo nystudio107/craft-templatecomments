@@ -34,7 +34,8 @@ class CommentBlockNode extends \Twig_Node_Block
             ->addDebugInfo($this)
             ->write(sprintf("public function block_%s(\$context, array \$blocks = array())\n", $this->getAttribute('name')), "{\n")
             ->indent()
-            ;
+            ->write("\$macros = \$this->macros;\n")
+        ;
         if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler
                 ->write('$_blockTimer = microtime(true)')

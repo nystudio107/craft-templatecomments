@@ -1,5 +1,10 @@
 # Template Comments Changelog
 
+## 1.1.0 - 2019-06-12
+### Changed
+* Fixed an issue with Craft CMS `^3.1.29` due to it requiring Twig `^2.11.0` that caused imported macros to not be scoped properly
+* Template Comments now _requires_ Craft CMS `^3.1.29`
+
 ## 1.0.6 - 2019-02-23
 ### Changed
 * Fixed an issue that caused unparsed tags to be generated for Twig's `source()` function
