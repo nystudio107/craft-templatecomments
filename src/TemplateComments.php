@@ -135,6 +135,10 @@ class TemplateComments extends Plugin
     protected function installEventListeners()
     {
         $request = Craft::$app->getRequest();
+        // Do nothing at all on AJAX requests
+        if ($request->isAjax) {
+            return;
+        }
         // Install only for non-console site requests
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             $this->installSiteEventListeners();
