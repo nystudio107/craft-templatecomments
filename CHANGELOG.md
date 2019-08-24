@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.1.1 - 2019-08-24
+### Changed
+* Don't install event listeners for AJAX requests
+
 ## 1.1.0 - 2019-06-12
 ### Changed
 * Fixed an issue with Craft CMS `^3.1.29` due to it requiring Twig `^2.11.0` that caused imported macros to not be scoped properly
