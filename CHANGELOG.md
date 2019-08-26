@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.1.2 - 2019-08-25
+### Changed
+* Don't check `getIsAjax()` for console requests
+
 ## 1.1.1 - 2019-08-24
 ### Changed
 * Don't install event listeners for AJAX requests

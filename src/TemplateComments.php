@@ -95,7 +95,7 @@ class TemplateComments extends Plugin
         $request = Craft::$app->getRequest();
         if (!$request->getIsConsoleRequest()) {
             // Do nothing at all on AJAX requests
-            if ($request->isAjax) {
+            if ($request->getIsAjax()) {
                 return;
             }
             // Install only for site requests
@@ -136,7 +136,7 @@ class TemplateComments extends Plugin
     {
         $request = Craft::$app->getRequest();
         // Do nothing at all on AJAX requests
-        if ($request->isAjax) {
+        if (!$request->getIsConsoleRequest() && $request->getIsAjax()) {
             return;
         }
         // Install only for non-console site requests
