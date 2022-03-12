@@ -24,7 +24,7 @@ class CommentTemplateLoader extends TemplateLoader
     /**
      * @inheritdoc
      */
-    public function getSourceContext($name)
+    public function getSourceContext(string $name): \Twig\Source
     {
         $template = $this->_resolveTemplate($name);
 
@@ -33,10 +33,10 @@ class CommentTemplateLoader extends TemplateLoader
         }
 
         $escapedName = addslashes($name);
-        $prefix = "{% comments '{$escapedName}' %}".PHP_EOL;
+        $prefix = sprintf('{%% comments \'%s\' %%}', $escapedName).PHP_EOL;
         $suffix = PHP_EOL."{% endcomments %}";
 
-        return new \Twig_Source($prefix.file_get_contents($template).$suffix, $name, $template);
+        return new \Twig\Source($prefix.file_get_contents($template).$suffix, $name, $template);
     }
 
     // Private Methods

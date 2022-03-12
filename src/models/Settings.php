@@ -60,12 +60,11 @@ class Settings extends Model
 
     // Public Methods
     // =========================================================================
-
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
     /**
-     * @return array
+     * @return array<int, array<string|string[]|class-string<\craft\validators\ArrayValidator>>>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [

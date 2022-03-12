@@ -16,7 +16,7 @@ namespace nystudio107\templatecomments\web\twig\nodes;
  * @package   TemplateComments
  * @since     1.0.0
  */
-class CommentsNode extends \Twig_Node
+class CommentsNode extends \Twig\Node\Node
 {
     // Public Methods
     // =========================================================================
@@ -24,7 +24,7 @@ class CommentsNode extends \Twig_Node
     /**
      * @inheritdoc
      */
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(\Twig\Compiler $compiler): void
     {
         $compiler
             ->addDebugInfo($this)
@@ -44,6 +44,7 @@ class CommentsNode extends \Twig_Node
                 ->outdent()
             ;
         }
+
         $compiler
             ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_templateTimer)*1000,2)."ms <<< TEMPLATE END <<< ".$_templateName." -->".PHP_EOL')
             ->raw(";\n")

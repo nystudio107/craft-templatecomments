@@ -21,7 +21,7 @@ use Craft;
  * @package   TemplateComments
  * @since     1.0.0
  */
-class CommentsTwigExtension extends \Twig_Extension
+class CommentsTwigExtension extends \Twig\Extension\AbstractExtension
 {
     // Public Methods
     // =========================================================================
@@ -29,7 +29,7 @@ class CommentsTwigExtension extends \Twig_Extension
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         return 'template-comments';
     }
@@ -37,10 +37,10 @@ class CommentsTwigExtension extends \Twig_Extension
     /**
      * @inheritdoc
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_Function('source', [$this, 'originalSource'], ['needs_environment' => true, 'is_safe' => ['all']]),
+            new \Twig\TwigFunction('source', fn(\Twig_Environment $env, string $name, bool $ignoreMissing = false): string => $this->originalSource($env, $name, $ignoreMissing), ['needs_environment' => true, 'is_safe' => ['all']]),
         ];
     }
 
@@ -53,6 +53,7 @@ class CommentsTwigExtension extends \Twig_Extension
         if (TemplateComments::$settings->templateCommentsEnabled) {
             $parsers[] = new CommentsTokenParser();
         }
+
         if (TemplateComments::$settings->blockCommentsEnabled) {
             $parsers[] = new CommentBlockTokenParser();
         }
@@ -63,20 +64,18 @@ class CommentsTwigExtension extends \Twig_Extension
     /**
      * Returns a template content without rendering it.
      *
-     * @param \Twig_Environment $env
      * @param string           $name          The template name
      * @param bool             $ignoreMissing Whether to ignore missing templates or not
-     *
      * @return string The template source
      */
-    function originalSource($env, $name, $ignoreMissing = false)
+    function originalSource(\Twig\Environment $env, string $name, bool $ignoreMissing = false)
     {
         $loader = TemplateComments::$originalTwigLoader;
         try {
             return $loader->getSourceContext($name)->getCode();
-        } catch (\Twig_Error_Loader $e) {
+        } catch (\Twig\Error\LoaderError $twigErrorLoader) {
             if (!$ignoreMissing) {
-                throw $e;
+                throw $twigErrorLoader;
             }
         }
     }

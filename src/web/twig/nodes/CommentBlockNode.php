@@ -17,18 +17,19 @@ namespace nystudio107\templatecomments\web\twig\nodes;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class CommentBlockNode extends \Twig_Node_Block
+class CommentBlockNode extends \Twig\Node\BlockNode
 {
     private $blockName;
-    private $excludeBlocks = ['attr'];
 
-    public function __construct($name, \Twig_Node $body, $lineno, $tag = null)
+    private array $excludeBlocks = ['attr'];
+
+    public function __construct(string $name, \Twig\Node\Node $body, int $lineno, string $tag = null)
     {
         parent::__construct($name, $body, $lineno, $tag);
         $this->blockName = $name;
     }
 
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(\Twig\Compiler $compiler): void
     {
         $compiler
             ->addDebugInfo($this)
@@ -46,6 +47,7 @@ class CommentBlockNode extends \Twig_Node_Block
                 ->write('echo PHP_EOL."<!-- >>> BLOCK BEGIN >>> ".$_blockName." -->".PHP_EOL')
                 ->raw(";\n");
         }
+
         $compiler
             ->subcompile($this->getNode('body'))
             ->outdent()
@@ -56,6 +58,7 @@ class CommentBlockNode extends \Twig_Node_Block
                 ->raw(";\n")
                 ->write("unset(\$_blockName);\n");
         }
+
         $compiler
             ->write("}\n\n")
         ;

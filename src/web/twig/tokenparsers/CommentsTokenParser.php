@@ -17,7 +17,7 @@ use nystudio107\templatecomments\web\twig\nodes\CommentsNode;
  * @package   TemplateComments
  * @since     1.0.0
  */
-class CommentsTokenParser extends \Twig_TokenParser
+class CommentsTokenParser extends \Twig\TokenParser\AbstractTokenParser
 {
     // Public Methods
     // =========================================================================
@@ -25,7 +25,7 @@ class CommentsTokenParser extends \Twig_TokenParser
     /**
      * @inheritdoc
      */
-    public function getTag()
+    public function getTag(): string
     {
         return 'comments';
     }
@@ -33,27 +33,22 @@ class CommentsTokenParser extends \Twig_TokenParser
     /**
      * @inheritdoc
      */
-    public function parse(\Twig_Token $token)
+    public function parse(\Twig\Token $token): \nystudio107\templatecomments\web\twig\nodes\CommentsNode
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
         $nodes = [
             'templateName' => $this->parser->getExpressionParser()->parseExpression(),
         ];
-        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
-        $nodes['body'] = $this->parser->subparse([$this, 'decideCommentsEnd'], true);
-        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
+        $stream->expect(\Twig\Token::BLOCK_END_TYPE);
+        $nodes['body'] = $this->parser->subparse(fn(\Twig_Token $token): bool => $this->decideCommentsEnd($token), true);
+        $stream->expect(\Twig\Token::BLOCK_END_TYPE);
 
         return new CommentsNode($nodes, [], $lineno, $this->getTag());
     }
 
 
-    /**
-     * @param \Twig_Token $token
-     *
-     * @return bool
-     */
-    public function decideCommentsEnd(\Twig_Token $token): bool
+    public function decideCommentsEnd(\Twig\Token $token): bool
     {
         return $token->test('endcomments');
     }

@@ -45,7 +45,7 @@ class TemplateComments extends Plugin
     public static $settings;
 
     /**
-     * @var \Twig_LoaderInterface
+     * @var \Twig\Loader\LoaderInterface
      */
     public static $originalTwigLoader;
 
@@ -55,7 +55,7 @@ class TemplateComments extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.0';
 
     // Public Methods
     // =========================================================================
@@ -63,7 +63,7 @@ class TemplateComments extends Plugin
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // Initialize properties
@@ -90,7 +90,7 @@ class TemplateComments extends Plugin
     /**
      * Add in our Craft components
      */
-    protected function addComponents()
+    protected function addComponents(): void
     {
         $request = Craft::$app->getRequest();
         if (!$request->getIsConsoleRequest()) {
@@ -98,10 +98,12 @@ class TemplateComments extends Plugin
             if ($request->getIsAjax()) {
                 return;
             }
+
             // Install only for site requests
             if ($request->getIsSiteRequest()) {
                 $this->installSiteComponents();
             }
+
             // Install only for Control Panel requests
             if ($request->getIsCpRequest()) {
                 $this->installCpComponents();
@@ -112,7 +114,7 @@ class TemplateComments extends Plugin
     /**
      * Install components for site requests only
      */
-    protected function installSiteComponents()
+    protected function installSiteComponents(): void
     {
         if (self::$settings->siteTemplateComments) {
             $this->installTemplateComponents();
@@ -122,7 +124,7 @@ class TemplateComments extends Plugin
     /**
      * Install components for Control Panel requests only
      */
-    protected function installCpComponents()
+    protected function installCpComponents(): void
     {
         if (self::$settings->cpTemplateComments) {
             $this->installTemplateComponents();
@@ -132,17 +134,19 @@ class TemplateComments extends Plugin
     /**
      * Install our event listeners
      */
-    protected function installEventListeners()
+    protected function installEventListeners(): void
     {
         $request = Craft::$app->getRequest();
         // Do nothing at all on AJAX requests
         if (!$request->getIsConsoleRequest() && $request->getIsAjax()) {
             return;
         }
+
         // Install only for non-console site requests
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             $this->installSiteEventListeners();
         }
+
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             $this->installCpEventListeners();
@@ -152,7 +156,7 @@ class TemplateComments extends Plugin
     /**
      * Install site event listeners for site requests only
      */
-    protected function installSiteEventListeners()
+    protected function installSiteEventListeners(): void
     {
         if (self::$settings->siteTemplateComments) {
             $this->installTemplateEventListeners();
@@ -162,7 +166,7 @@ class TemplateComments extends Plugin
     /**
      * Install site event listeners for Control Panel requests only
      */
-    protected function installCpEventListeners()
+    protected function installCpEventListeners(): void
     {
         if (self::$settings->cpTemplateComments) {
             $this->installTemplateEventListeners();
@@ -172,7 +176,7 @@ class TemplateComments extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): \nystudio107\templatecomments\models\Settings
     {
         return new Settings();
     }
@@ -183,7 +187,7 @@ class TemplateComments extends Plugin
     /**
      * Install our template components
      */
-    private function installTemplateComponents()
+    private function installTemplateComponents(): void
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         if (!self::$settings->onlyCommentsInDevMode
@@ -197,7 +201,7 @@ class TemplateComments extends Plugin
     /**
      * Install our template event listeners
      */
-    private function installTemplateEventListeners()
+    private function installTemplateEventListeners(): void
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         if (!self::$settings->onlyCommentsInDevMode
@@ -206,7 +210,7 @@ class TemplateComments extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
-                function (TemplateEvent $event) {
+                function (TemplateEvent $event): void {
                     $view = Craft::$app->getView();
                     if ($this->enabledForTemplate($event->template)) {
                         $view->getTwig()->setLoader(new CommentTemplateLoader($view));
@@ -219,9 +223,7 @@ class TemplateComments extends Plugin
     /**
      * Is template parsing enabled for this template?
      *
-     * @param string $templateName
      *
-     * @return bool
      */
     private function enabledForTemplate(string $templateName): bool
     {
