@@ -26,32 +26,35 @@ class Settings extends Model
     /**
      * @var bool Whether comments should be generated for site templates
      */
-    public $siteTemplateComments = true;
+    public bool $siteTemplateComments = true;
 
     /**
      * @var bool Whether comments should be generated for Control Panel templates
      */
-    public $cpTemplateComments = false;
+    public bool $cpTemplateComments = false;
 
     /**
      * @var bool Whether to generate comments only when `devMode` is on
      */
-    public $onlyCommentsInDevMode = true;
+    public bool $onlyCommentsInDevMode = true;
 
     /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
-    public $templateCommentsEnabled = true;
+    public bool $templateCommentsEnabled = true;
 
     /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for `{% block %}`s
      */
-    public $blockCommentsEnabled = true;
+    public bool $blockCommentsEnabled = true;
 
     /**
+     * @deprecated This is no longer used
      * @var array Template file suffixes that Template Comments should be enabled for
      */
-    public $allowedTemplateSuffixes = [
+    public array $allowedTemplateSuffixes = [
         '',
         'twig',
         'htm',
@@ -60,9 +63,8 @@ class Settings extends Model
 
     // Public Methods
     // =========================================================================
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     /**
-     * @return array<int, array<string|string[]|class-string<\craft\validators\ArrayValidator>>>
+     * @inerhitdoc
      */
     public function rules(): array
     {
