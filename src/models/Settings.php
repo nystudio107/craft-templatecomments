@@ -39,6 +39,15 @@ class Settings extends Model
     public bool $onlyCommentsInDevMode = true;
 
     /**
+     * @var array Don't add comments to template blocks that contain these strings (case-insensitive)
+     */
+    public array $excludeBlocksThatContain = [
+        'css',
+        'js',
+        'javascript',
+    ];
+
+    /**
      * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
@@ -81,6 +90,7 @@ class Settings extends Model
             ],
             [
                 [
+                    'excludeBlocksThatContain',
                     'allowedTemplateSuffixes',
                 ],
                 ArrayValidator::class

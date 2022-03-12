@@ -12,8 +12,10 @@
 
 namespace nystudio107\templatecomments\web\twig\tokenparsers;
 
+use nystudio107\templatecomments\TemplateComments;
 use nystudio107\templatecomments\web\twig\nodes\CommentBlockNode;
 use Twig\Error\SyntaxError;
+use Twig\Node\BlockNode;
 use Twig\Node\BlockReferenceNode;
 use Twig\Node\Node;
 use Twig\Node\PrintNode;
@@ -41,7 +43,16 @@ final class CommentBlockTokenParser extends AbstractTokenParser
             throw new SyntaxError(sprintf("The block '%s' has already been defined line %d.", $name, $this->parser->getBlock($name)->getTemplateLine()), $stream->getCurrent()->getLine(), $stream->getSourceContext());
         }
 
-        $this->parser->setBlock($name, $block = new CommentBlockNode($name, new Node(array()), $lineno));
+        // Exclude certain blocks from being CommentBlockNodes
+        $blockClass = CommentBlockNode::class;
+        $settings = TemplateComments::$settings;
+        foreach ($settings->excludeBlocksThatContain as $excludeString) {
+            if (stripos($name, $excludeString) !== false) {
+                $blockClass = BlockNode::class;
+            }
+        }
+
+        $this->parser->setBlock($name, $block = new $blockClass($name, new Node(array()), $lineno));
         $this->parser->pushLocalScope();
         $this->parser->pushBlockStack($name);
 
