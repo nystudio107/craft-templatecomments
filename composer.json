@@ -2,7 +2,7 @@
   "name": "nystudio107/craft-templatecomments",
   "description": "Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.",
   "type": "craft-plugin",
-  "version": "1.1.2",
+  "version": "4.0.0-beta.1",
   "keywords": [
     "craftcms",
     "craft-plugin",
@@ -11,8 +11,9 @@
     "debugging"
   ],
   "support": {
-    "docs": "https://nystudio107.com/plugins/template-comments/documentation",
-    "issues": "https://nystudio107.com/plugins/template-comments/support"
+    "docs": "https://nystudio107.com/docs/template-comments/",
+    "issues": "https://nystudio107.com/plugins/template-comments/support",
+    "source": "https://github.com/nystudio107/craft-templatecomments"
   },
   "license": "MIT",
   "authors": [
@@ -22,7 +23,7 @@
     }
   ],
   "require": {
-    "craftcms/cms": "^3.1.29"
+    "craftcms/cms": "^4.0.0-beta.1"
   },
   "autoload": {
     "psr-4": {
@@ -30,11 +31,8 @@
     }
   },
   "extra": {
-    "name": "Template Comments",
+    "class": "nystudio107\\templatecomments\\TemplateComments",
     "handle": "templatecomments",
-    "hasCpSettings": false,
-    "hasCpSection": false,
-    "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-templatecomments/v1/CHANGELOG.md",
-    "class": "nystudio107\\templatecomments\\TemplateComments"
+    "name": "Template Comments"
   }
 }

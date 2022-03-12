@@ -1,5 +1,11 @@
 # Template Comments Changelog
 
+## 4.0.0-beta.1 - 2022.03.12
+
+### Added
+
+* Initial Craft CMS 4 compatibility
+
 ## 1.1.2 - 2019-08-25
 ### Changed
 * Don't check `getIsAjax()` for console requests
