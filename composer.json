@@ -1,40 +1,40 @@
 {
-    "name": "nystudio107/craft-templatecomments",
-    "description": "Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.",
-    "type": "craft-plugin",
-    "version": "1.1.2",
-    "keywords": [
-        "craftcms",
-        "craft-plugin",
-        "twig",
-        "comments",
-        "debugging"
-    ],
-    "support": {
-        "docs": "https://nystudio107.com/plugins/template-comments/documentation",
-        "issues": "https://nystudio107.com/plugins/template-comments/support"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "nystudio107",
-            "homepage": "https://nystudio107.com/"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^3.1.29"
-    },
-    "autoload": {
-        "psr-4": {
-          "nystudio107\\templatecomments\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "Template Comments",
-        "handle": "templatecomments",
-        "hasCpSettings": false,
-        "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-templatecomments/v1/CHANGELOG.md",
-        "class": "nystudio107\\templatecomments\\TemplateComments"
+  "name": "nystudio107/craft-templatecomments",
+  "description": "Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.",
+  "type": "craft-plugin",
+  "version": "1.1.2",
+  "keywords": [
+    "craftcms",
+    "craft-plugin",
+    "twig",
+    "comments",
+    "debugging"
+  ],
+  "support": {
+    "docs": "https://nystudio107.com/plugins/template-comments/documentation",
+    "issues": "https://nystudio107.com/plugins/template-comments/support"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "nystudio107",
+      "homepage": "https://nystudio107.com/"
     }
+  ],
+  "require": {
+    "craftcms/cms": "^3.1.29"
+  },
+  "autoload": {
+    "psr-4": {
+      "nystudio107\\templatecomments\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Template Comments",
+    "handle": "templatecomments",
+    "hasCpSettings": false,
+    "hasCpSection": false,
+    "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-templatecomments/v1/CHANGELOG.md",
+    "class": "nystudio107\\templatecomments\\TemplateComments"
+  }
 }
