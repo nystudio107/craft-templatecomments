@@ -1,5 +1,11 @@
 # Template Comments Changelog
 
+## 4.0.0-beta.2 - 2022.03.12
+
+### Added
+
+* Added `excludeBlocksThatContain` config setting to allow excluding of template comments based on the `{% block %}` name
+
 ## 4.0.0-beta.1 - 2022.03.12
 
 ### Added
