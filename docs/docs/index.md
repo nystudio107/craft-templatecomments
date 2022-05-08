@@ -28,9 +28,9 @@ You can also install Template Comments via the **Plugin Store** in the Craft Con
 
 ## Template Comments Overview
 
-Template Comments is a debugging tool that wraps your Twig `{% block %}`s and templates that you `{% include %}` with HTML comments. By default, it does this only when `devMode` is on.
+Template Comments is a debugging tool that wraps your Twig `{% block %}`s with HTML comments. By default, it does this only when `devMode` is on.
 
-It also records performance data, so you know how much overhead each `{% block %}` or `{% include %}` is adding.
+It also records performance data, so you know how much overhead each `{% block %}` is adding.
 
 With more complicated "content builder" setups, this can help bring clarity to where the various HTML on your pages is coming from.
 
@@ -62,34 +62,23 @@ return [
     'onlyCommentsInDevMode' => true,
 
     /**
-     * @var bool Whether or not to show comments for templates that are include'd
+     * @var array Don't add comments to template blocks that contain these strings (case-insensitive)
      */
-    'templateCommentsEnabled' => true,
-
-    /**
-     * @var bool Whether or not to show comments for `{% block %}`s
-     */
-    'blockCommentsEnabled' => true,
-
-    /**
-     * @var array Template file suffixes that Template Comments should be enabled for
-     */
-    'allowedTemplateSuffixes' => [
-        '',
-        'twig',
-        'htm',
-        'html',
-    ],
+    public $excludeBlocksThatContain = [
+        'css',
+        'js',
+        'javascript',
+    ];
 ];
 ```
 
 ## Using Template Comments
 
-Nothing much to say here; install the plugin, and it "just works". If `devMode` is off, it doesn't even install itself, so there should be zero effect in production.
+Nothing much to say here; install the plugin, and it "just works" when you view the source of a Twig-rendered page in your web browser. If `devMode` is off, it doesn't even install itself, so there should be zero effect in production.
 
 The `<<< END <<<` comments all include performance data in milliseconds, e.g.:
 ```html
-<!-- 22.34ms <<< TEMPLATE END <<< templatecomments/_layout.twig -->
+<!-- <<< BLOCK END <<< bodyHtml FROM _layouts/generic-page-layout.twig TIME 1.56ms -->
 ```
 
 Brought to you by [nystudio107](https://nystudio107.com/)
