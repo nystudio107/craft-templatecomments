@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 1.2.0 - 2022-05-07
+### Added
+* Refactored the codebase to simplify how it works, removing the template loader entirely, bringing it in line with how the Craft 4 plugin works
+
 ## 1.1.2 - 2019-08-25
 ### Changed
 * Don't check `getIsAjax()` for console requests
