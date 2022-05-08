@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 4.0.0 - 2022.05.07
+### Added
+* Initial release for Craft CMS 4
+
 ## 4.0.0-beta.2 - 2022.03.12
 
 ### Added
