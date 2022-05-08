@@ -10,16 +10,11 @@
 
 namespace nystudio107\templatecomments;
 
+use Craft;
+use craft\base\Plugin;
 use nystudio107\templatecomments\models\Settings;
 use nystudio107\templatecomments\web\twig\CommentsTwigExtension;
 use nystudio107\templatecomments\web\twig\CommentTemplateLoader;
-
-use Craft;
-use craft\base\Plugin;
-use craft\events\TemplateEvent;
-use craft\web\View;
-
-use yii\base\Event;
 
 /**
  * Class TemplateComments
@@ -44,11 +39,6 @@ class TemplateComments extends Plugin
      */
     public static $settings;
 
-    /**
-     * @var \Twig_LoaderInterface
-     */
-    public static $originalTwigLoader;
-
     // Public Properties
     // =========================================================================
 
@@ -71,8 +61,6 @@ class TemplateComments extends Plugin
         self::$settings = $this->getSettings();
         // Add in our Craft components
         $this->addComponents();
-        // Install our global event handlers
-        $this->installEventListeners();
 
         Craft::info(
             Craft::t(
@@ -130,46 +118,6 @@ class TemplateComments extends Plugin
     }
 
     /**
-     * Install our event listeners
-     */
-    protected function installEventListeners()
-    {
-        $request = Craft::$app->getRequest();
-        // Do nothing at all on AJAX requests
-        if (!$request->getIsConsoleRequest() && $request->getIsAjax()) {
-            return;
-        }
-        // Install only for non-console site requests
-        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            $this->installSiteEventListeners();
-        }
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            $this->installCpEventListeners();
-        }
-    }
-
-    /**
-     * Install site event listeners for site requests only
-     */
-    protected function installSiteEventListeners()
-    {
-        if (self::$settings->siteTemplateComments) {
-            $this->installTemplateEventListeners();
-        }
-    }
-
-    /**
-     * Install site event listeners for Control Panel requests only
-     */
-    protected function installCpEventListeners()
-    {
-        if (self::$settings->cpTemplateComments) {
-            $this->installTemplateEventListeners();
-        }
-    }
-
-    /**
      * @inheritdoc
      */
     protected function createSettingsModel()
@@ -188,45 +136,7 @@ class TemplateComments extends Plugin
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         if (!self::$settings->onlyCommentsInDevMode
             || (self::$settings->onlyCommentsInDevMode && $devMode)) {
-            $view = Craft::$app->getView();
-            self::$originalTwigLoader = $view->getTwig()->getLoader();
             Craft::$app->view->registerTwigExtension(new CommentsTwigExtension());
         }
-    }
-
-    /**
-     * Install our template event listeners
-     */
-    private function installTemplateEventListeners()
-    {
-        $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        if (!self::$settings->onlyCommentsInDevMode
-            || (self::$settings->onlyCommentsInDevMode && $devMode)) {
-            // Remember the name of the currently rendering template
-            Event::on(
-                View::class,
-                View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
-                function (TemplateEvent $event) {
-                    $view = Craft::$app->getView();
-                    if ($this->enabledForTemplate($event->template)) {
-                        $view->getTwig()->setLoader(new CommentTemplateLoader($view));
-                    }
-                }
-            );
-        }
-    }
-
-    /**
-     * Is template parsing enabled for this template?
-     *
-     * @param string $templateName
-     *
-     * @return bool
-     */
-    private function enabledForTemplate(string $templateName): bool
-    {
-        $ext = pathinfo($templateName, PATHINFO_EXTENSION);
-        return (self::$settings->templateCommentsEnabled
-            && \in_array($ext, self::$settings->allowedTemplateSuffixes, false));
     }
 }

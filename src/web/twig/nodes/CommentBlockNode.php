@@ -34,30 +34,32 @@ class CommentBlockNode extends \Twig_Node_Block
             ->addDebugInfo($this)
             ->write(sprintf("public function block_%s(\$context, array \$blocks = array())\n", $this->getAttribute('name')), "{\n")
             ->indent()
-            ->write("\$macros = \$this->macros;\n")
-        ;
+            ->write("\$macros = \$this->macros;\n");
         if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler
                 ->write('$_blockTimer = microtime(true)')
                 ->raw(";\n")
-                ->write('$_blockName = ')
-                ->write("'".$this->blockName."'")
+                ->write('$_templateName = ')
+                ->write("'" . $this->getTemplateName() . "'")
                 ->raw(";\n")
-                ->write('echo PHP_EOL."<!-- >>> BLOCK BEGIN >>> ".$_blockName." -->".PHP_EOL')
+                ->write('$_blockName = ')
+                ->write("'" . $this->blockName . "'")
+                ->raw(";\n")
+                ->write('echo PHP_EOL."<!-- >>> BLOCK BEGIN >>> ".$_blockName." FROM ".$_templateName." -->".PHP_EOL')
                 ->raw(";\n");
         }
         $compiler
             ->subcompile($this->getNode('body'))
-            ->outdent()
-            ;
+            ->outdent();
         if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler
-                ->write('echo PHP_EOL."<!-- ".number_format((microtime(true)-$_blockTimer)*1000,2)."ms <<< BLOCK END <<< ".$_blockName." -->".PHP_EOL')
+                ->write('echo PHP_EOL."<!-- <<< BLOCK END <<< ".$_blockName." FROM ".$_templateName." TIME ".number_format((microtime(true)-$_blockTimer)*1000,2)."ms -->".PHP_EOL')
                 ->raw(";\n")
-                ->write("unset(\$_blockName);\n");
+                ->write("unset(\$_blockTimer);\n")
+                ->write("unset(\$_blockName);\n")
+                ->write("unset(\$_templateName);\n");
         }
         $compiler
-            ->write("}\n\n")
-        ;
+            ->write("}\n\n");
     }
 }

@@ -39,16 +39,28 @@ class Settings extends Model
     public $onlyCommentsInDevMode = true;
 
     /**
+     * @var array Don't add comments to template blocks that contain these strings (case-insensitive)
+     */
+    public $excludeBlocksThatContain = [
+        'css',
+        'js',
+        'javascript',
+    ];
+
+    /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
     public $templateCommentsEnabled = true;
 
     /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for `{% block %}`s
      */
     public $blockCommentsEnabled = true;
 
     /**
+     * @deprecated This is no longer used
      * @var array Template file suffixes that Template Comments should be enabled for
      */
     public $allowedTemplateSuffixes = [
@@ -60,12 +72,10 @@ class Settings extends Model
 
     // Public Methods
     // =========================================================================
-
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     /**
-     * @return array
+     * @inerhitdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [
@@ -80,6 +90,7 @@ class Settings extends Model
             ],
             [
                 [
+                    'excludeBlocksThatContain',
                     'allowedTemplateSuffixes',
                 ],
                 ArrayValidator::class

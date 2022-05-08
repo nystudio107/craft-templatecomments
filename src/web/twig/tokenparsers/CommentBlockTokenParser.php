@@ -12,7 +12,9 @@
 
 namespace nystudio107\templatecomments\web\twig\tokenparsers;
 
+use nystudio107\templatecomments\TemplateComments;
 use nystudio107\templatecomments\web\twig\nodes\CommentBlockNode;
+use Twig\Node\BlockNode;
 
 /**
  * Marks a section of a template as being reusable.
@@ -34,7 +36,16 @@ final class CommentBlockTokenParser extends \Twig_TokenParser
         if ($this->parser->hasBlock($name)) {
             throw new \Twig_Error_Syntax(sprintf("The block '%s' has already been defined line %d.", $name, $this->parser->getBlock($name)->getTemplateLine()), $stream->getCurrent()->getLine(), $stream->getSourceContext());
         }
-        $this->parser->setBlock($name, $block = new CommentBlockNode($name, new \Twig_Node(array()), $lineno));
+        // Exclude certain blocks from being CommentBlockNodes
+        $blockClass = CommentBlockNode::class;
+        $settings = TemplateComments::$settings;
+        foreach ($settings->excludeBlocksThatContain as $excludeString) {
+            if (stripos($name, $excludeString) !== false) {
+                $blockClass = BlockNode::class;
+            }
+        }
+
+        $this->parser->setBlock($name, $block = new $blockClass($name, new \Twig_Node(array()), $lineno));
         $this->parser->pushLocalScope();
         $this->parser->pushBlockStack($name);
 

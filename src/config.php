@@ -42,16 +42,28 @@ return [
     'onlyCommentsInDevMode' => true,
 
     /**
+     * @var array Don't add comments to template blocks that contain these strings (case-insensitive)
+     */
+    'excludeBlocksThatContain' => [
+        'css',
+        'js',
+        'javascript',
+    ],
+
+    /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
     'templateCommentsEnabled' => true,
 
     /**
+     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for `{% block %}`s
      */
     'blockCommentsEnabled' => true,
 
     /**
+     * @deprecated This is no longer used
      * @var array Template file suffixes that Template Comments should be enabled for
      */
     'allowedTemplateSuffixes' => [
