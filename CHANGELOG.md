@@ -1,5 +1,15 @@
 # Template Comments Changelog
 
+## 1.2.1 - UNRELEASED
+### Added
+* Add `phpstan` and `ecs` code linting
+* Add `code-analysis.yaml` GitHub action
+
+### Changed
+* Updated docs to use node 20 & a new sitemap plugin
+* PHPstan code cleanup
+* ECS code cleanup
+
 ## 1.2.0 - 2022-05-07
 ### Added
 * Refactored the codebase to simplify how it works, removing the template loader entirely, bringing it in line with how the Craft 4 plugin works
