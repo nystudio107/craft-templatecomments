@@ -35,7 +35,7 @@ class CommentsTokenParser extends Twig_TokenParser
     /**
      * @inheritdoc
      */
-    public function parse(Twig_Token $token)
+    public function parse($token)
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();

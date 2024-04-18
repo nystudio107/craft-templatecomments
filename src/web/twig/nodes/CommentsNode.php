@@ -11,7 +11,6 @@
 
 namespace nystudio107\templatecomments\web\twig\nodes;
 
-use Twig_Compiler;
 use Twig_Node;
 
 /**
@@ -27,7 +26,7 @@ class CommentsNode extends Twig_Node
     /**
      * @inheritdoc
      */
-    public function compile(Twig_Compiler $compiler)
+    public function compile($compiler)
     {
         $compiler
             ->addDebugInfo($this)

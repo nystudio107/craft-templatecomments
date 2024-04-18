@@ -17,6 +17,7 @@ use craft\web\View;
 use nystudio107\templatecomments\models\Settings;
 use nystudio107\templatecomments\web\twig\CommentsTwigExtension;
 use nystudio107\templatecomments\web\twig\CommentTemplateLoader;
+use Twig\Loader\LoaderInterface;
 use Twig_LoaderInterface;
 use yii\base\Event;
 use function in_array;
@@ -35,17 +36,17 @@ class TemplateComments extends Plugin
     // =========================================================================
 
     /**
-     * @var TemplateComments
+     * @var ?TemplateComments
      */
-    public static $plugin;
+    public static $plugin = null;
 
     /**
-     * @var Settings $settings
+     * @var ?Settings $settings
      */
     public static $settings;
 
     /**
-     * @var Twig_LoaderInterface
+     * @var Twig_LoaderInterface|LoaderInterface
      */
     public static $originalTwigLoader;
 
@@ -68,7 +69,9 @@ class TemplateComments extends Plugin
         parent::init();
         // Initialize properties
         self::$plugin = $this;
-        self::$settings = $this->getSettings();
+        /** @var ?Settings $settings */
+        $settings = $this->getSettings();
+        self::$settings = $settings;
         // Add in our Craft components
         $this->addComponents();
         // Install our global event handlers
@@ -186,8 +189,7 @@ class TemplateComments extends Plugin
     private function installTemplateComponents()
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        if (!self::$settings->onlyCommentsInDevMode
-            || (self::$settings->onlyCommentsInDevMode && $devMode)) {
+        if (!self::$settings->onlyCommentsInDevMode || $devMode) {
             $view = Craft::$app->getView();
             self::$originalTwigLoader = $view->getTwig()->getLoader();
             Craft::$app->view->registerTwigExtension(new CommentsTwigExtension());
@@ -200,8 +202,7 @@ class TemplateComments extends Plugin
     private function installTemplateEventListeners()
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        if (!self::$settings->onlyCommentsInDevMode
-            || (self::$settings->onlyCommentsInDevMode && $devMode)) {
+        if (!self::$settings->onlyCommentsInDevMode || $devMode) {
             // Remember the name of the currently rendering template
             Event::on(
                 View::class,

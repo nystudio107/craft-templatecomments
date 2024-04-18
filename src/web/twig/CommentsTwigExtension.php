@@ -81,5 +81,7 @@ class CommentsTwigExtension extends Twig_Extension
                 throw $e;
             }
         }
+
+        return '';
     }
 }

@@ -12,30 +12,34 @@
 
 namespace nystudio107\templatecomments\web\twig\nodes;
 
+use Twig_Node;
+use Twig_Node_Block;
+use function in_array;
+
 /**
  * Represents a block node.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class CommentBlockNode extends \Twig_Node_Block
+class CommentBlockNode extends Twig_Node_Block
 {
     private $blockName;
     private $excludeBlocks = ['attr'];
 
-    public function __construct($name, \Twig_Node $body, $lineno, $tag = null)
+    public function __construct($name, Twig_Node $body, $lineno, $tag = null)
     {
         parent::__construct($name, $body, $lineno, $tag);
         $this->blockName = $name;
     }
 
-    public function compile(\Twig_Compiler $compiler)
+    public function compile($compiler)
     {
         $compiler
             ->addDebugInfo($this)
             ->write(sprintf("public function block_%s(\$context, array \$blocks = array())\n", $this->getAttribute('name')), "{\n")
             ->indent()
             ->write("\$macros = \$this->macros;\n");
-        if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
+        if (!in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler
                 ->write('$_blockTimer = microtime(true)')
                 ->raw(";\n")
@@ -51,7 +55,7 @@ class CommentBlockNode extends \Twig_Node_Block
         $compiler
             ->subcompile($this->getNode('body'))
             ->outdent();
-        if (!\in_array($this->blockName, $this->excludeBlocks, false)) {
+        if (!in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler
                 ->write('echo PHP_EOL."<!-- <<< BLOCK END <<< ".$_blockName." FROM ".$_templateName." TIME ".number_format((microtime(true)-$_blockTimer)*1000,2)."ms -->".PHP_EOL')
                 ->raw(";\n")

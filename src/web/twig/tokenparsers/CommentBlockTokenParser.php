@@ -15,6 +15,12 @@ namespace nystudio107\templatecomments\web\twig\tokenparsers;
 use nystudio107\templatecomments\TemplateComments;
 use nystudio107\templatecomments\web\twig\nodes\CommentBlockNode;
 use Twig\Node\BlockNode;
+use Twig_Error_Syntax;
+use Twig_Node;
+use Twig_Node_BlockReference;
+use Twig_Node_Print;
+use Twig_Token;
+use Twig_TokenParser;
 
 /**
  * Marks a section of a template as being reusable.
@@ -26,15 +32,15 @@ use Twig\Node\BlockNode;
  *  {% endblock %}
  * </pre>
  */
-final class CommentBlockTokenParser extends \Twig_TokenParser
+final class CommentBlockTokenParser extends Twig_TokenParser
 {
-    public function parse(\Twig_Token $token)
+    public function parse($token)
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
         $name = $stream->expect(/* Twig_Token::NAME_TYPE */ 5)->getValue();
         if ($this->parser->hasBlock($name)) {
-            throw new \Twig_Error_Syntax(sprintf("The block '%s' has already been defined line %d.", $name, $this->parser->getBlock($name)->getTemplateLine()), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            throw new Twig_Error_Syntax(sprintf("The block '%s' has already been defined line %d.", $name, $this->parser->getBlock($name)->getTemplateLine()), $stream->getCurrent()->getLine(), $stream->getSourceContext());
         }
         // Exclude certain blocks from being CommentBlockNodes
         $blockClass = CommentBlockNode::class;
@@ -45,7 +51,7 @@ final class CommentBlockTokenParser extends \Twig_TokenParser
             }
         }
 
-        $this->parser->setBlock($name, $block = new $blockClass($name, new \Twig_Node(array()), $lineno));
+        $this->parser->setBlock($name, $block = new $blockClass($name, new Twig_Node(array()), $lineno));
         $this->parser->pushLocalScope();
         $this->parser->pushBlockStack($name);
 
@@ -55,12 +61,12 @@ final class CommentBlockTokenParser extends \Twig_TokenParser
                 $value = $token->getValue();
 
                 if ($value != $name) {
-                    throw new \Twig_Error_Syntax(sprintf('Expected endblock for block "%s" (but "%s" given).', $name, $value), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+                    throw new Twig_Error_Syntax(sprintf('Expected endblock for block "%s" (but "%s" given).', $name, $value), $stream->getCurrent()->getLine(), $stream->getSourceContext());
                 }
             }
         } else {
-            $body = new \Twig_Node(array(
-                new \Twig_Node_Print($this->parser->getExpressionParser()->parseExpression(), $lineno),
+            $body = new Twig_Node(array(
+                new Twig_Node_Print($this->parser->getExpressionParser()->parseExpression(), $lineno),
             ));
         }
         $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
@@ -69,10 +75,10 @@ final class CommentBlockTokenParser extends \Twig_TokenParser
         $this->parser->popBlockStack();
         $this->parser->popLocalScope();
 
-        return new \Twig_Node_BlockReference($name, $lineno, $this->getTag());
+        return new Twig_Node_BlockReference($name, $lineno, $this->getTag());
     }
 
-    public function decideBlockEnd(\Twig_Token $token)
+    public function decideBlockEnd(Twig_Token $token)
     {
         return $token->test('endblock');
     }
