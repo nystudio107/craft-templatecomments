@@ -1,11 +1,11 @@
 <?php
 /**
- * Template Comments plugin for Craft CMS 3.x
+ * Template Comments plugin for Craft CMS
  *
  * Adds a HTML comment to demarcate each Twig template that is included or extended.
  *
  * @link      https://nystudio107.com/
- * @copyright Copyright (c) 2018 nystudio107
+ * @copyright Copyright (c)  nystudio107
  */
 
 /**

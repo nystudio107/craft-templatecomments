@@ -1,11 +1,11 @@
 <?php
 /**
- * Template Comments plugin for Craft CMS 3.x
+ * Template Comments plugin for Craft CMS
  *
  * Adds a HTML comment to demarcate each Twig template that is included or extended.
  *
  * @link      https://nystudio107.com/
- * @copyright Copyright (c) 2018 nystudio107
+ * @copyright Copyright (c)  nystudio107
  */
 
 namespace nystudio107\templatecomments\models;
@@ -48,19 +48,16 @@ class Settings extends Model
     ];
 
     /**
-     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
     public bool $templateCommentsEnabled = true;
 
     /**
-     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for `{% block %}`s
      */
     public bool $blockCommentsEnabled = true;
 
     /**
-     * @deprecated This is no longer used
      * @var array Template file suffixes that Template Comments should be enabled for
      */
     public array $allowedTemplateSuffixes = [
