@@ -71,7 +71,7 @@ class CommentsTwigExtension extends AbstractExtension
      *
      * @return string The template source
      */
-    function originalSource(Environment $env, string $name, bool $ignoreMissing = false): string
+    public function originalSource(Environment $env, string $name, bool $ignoreMissing = false): string
     {
         $loader = TemplateComments::$originalTwigLoader;
         try {

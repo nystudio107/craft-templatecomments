@@ -15,5 +15,5 @@
  */
 return [
     '{name} plugin loaded' => '{name} plugin loaded',
-    'Error rendering `{template}` -> {error}' => 'Error rendering `{template}` -> {error}'
+    'Error rendering `{template}` -> {error}' => 'Error rendering `{template}` -> {error}',
 ];
