@@ -38,12 +38,12 @@ class TemplateComments extends Plugin
     /**
      * @var ?TemplateComments
      */
-    public static ?TemplateComments $plugin;
+    public static ?TemplateComments $plugin = null;
 
     /**
      * @var ?Settings $settings
      */
-    public static ?Settings $settings;
+    public static ?Settings $settings = null;
 
     /**
      * @var ?LoaderInterface
@@ -69,7 +69,9 @@ class TemplateComments extends Plugin
         parent::init();
         // Initialize properties
         self::$plugin = $this;
-        self::$settings = $this->getSettings();
+        /** @var ?Settings $settings */
+        $settings = $this->getSettings();
+        self::$settings = $settings;
         // Add in our Craft components
         $this->addComponents();
         // Install our global event handlers
@@ -189,8 +191,7 @@ class TemplateComments extends Plugin
     private function installTemplateComponents(): void
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        if (!self::$settings->onlyCommentsInDevMode
-            || (self::$settings->onlyCommentsInDevMode && $devMode)) {
+        if (!self::$settings->onlyCommentsInDevMode || $devMode) {
             $view = Craft::$app->getView();
             self::$originalTwigLoader = $view->getTwig()->getLoader();
             $view->registerTwigExtension(new CommentsTwigExtension());
@@ -203,8 +204,7 @@ class TemplateComments extends Plugin
     private function installTemplateEventListeners()
     {
         $devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        if (!self::$settings->onlyCommentsInDevMode
-            || (self::$settings->onlyCommentsInDevMode && $devMode)) {
+        if (!self::$settings->onlyCommentsInDevMode || $devMode) {
             // Remember the name of the currently rendering template
             Event::on(
                 View::class,

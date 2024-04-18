@@ -142,6 +142,7 @@ class TemplateCommentsParser extends Parser
 
         $traverser = new NodeTraverser($this->env, $this->visitors);
 
+        /** @var ModuleNode $node */
         $node = $traverser->traverse($node);
 
         // restore previous stack so previous parse() call can resume working
