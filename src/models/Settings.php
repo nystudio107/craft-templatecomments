@@ -48,19 +48,16 @@ class Settings extends Model
     ];
 
     /**
-     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for templates that are include'd
      */
     public $templateCommentsEnabled = true;
 
     /**
-     * @deprecated This is no longer used
      * @var bool Whether or not to show comments for `{% block %}`s
      */
     public $blockCommentsEnabled = true;
 
     /**
-     * @deprecated This is no longer used
      * @var array Template file suffixes that Template Comments should be enabled for
      */
     public $allowedTemplateSuffixes = [
