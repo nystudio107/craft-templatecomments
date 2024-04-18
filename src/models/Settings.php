@@ -64,7 +64,7 @@ class Settings extends Model
         '',
         'twig',
         'htm',
-        'html'
+        'html',
     ];
 
     // Public Methods
@@ -83,14 +83,14 @@ class Settings extends Model
                     'templateCommentsEnabled',
                     'blockCommentsEnabled',
                 ],
-                'boolean'
+                'boolean',
             ],
             [
                 [
                     'excludeBlocksThatContain',
                     'allowedTemplateSuffixes',
                 ],
-                ArrayValidator::class
+                ArrayValidator::class,
             ],
         ];
     }

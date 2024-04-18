@@ -229,5 +229,4 @@ class TemplateComments extends Plugin
         return (self::$settings->templateCommentsEnabled
             && in_array($ext, self::$settings->allowedTemplateSuffixes, false));
     }
-
 }
