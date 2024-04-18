@@ -2,6 +2,7 @@
 
 ## 4.0.1 - UNRELEASED
 ### Added
+* Added support for template comments for `{% include %}` and `{% extends %}` back into the plugin ([#40](https://github.com/nystudio107/craft-templatecomments/issues/40))
 * Add `phpstan` and `ecs` code linting
 * Add `code-analysis.yaml` GitHub action
 
