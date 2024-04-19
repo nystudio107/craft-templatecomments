@@ -38,6 +38,11 @@ This can be especially handy when dealing with OPC (Other People's Code). It sol
 
 ![Screenshot](./resources/screenshots/templatecomments-example.png)
 
+In Craft 5, it also adds support for [Rendering Elements](https://craftcms.com/docs/5.x/system/elements.html#rendering-elements) by outputting comments for the `_partials` templates that are rendered via Craft 5's `.render()` function:
+
+![Screenshot](./resources/screenshots/templatecomments-render.png)
+
+
 ## Configuring Template Comments
 
 All configuration is done via the `config.php`. For it to work, you'll need to copy it to your `craft/config/` directory, and rename it `templatecomments.php`
