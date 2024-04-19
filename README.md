@@ -1,6 +1,6 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/build-status/v4) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/code-intelligence.svg?b=v4)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/quality-score.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v5) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/coverage.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/?branch=v5) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/build.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/build-status/v5) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-templatecomments/badges/code-intelligence.svg?b=v5)](https://scrutinizer-ci.com/code-intelligence)
 
-# Template Comments plugin for Craft CMS 4.x
+# Template Comments plugin for Craft CMS 5.x
 
 Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.
 
@@ -8,7 +8,7 @@ Adds a HTML comment with performance timings to demarcate `{% block %}`s and eac
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later.
+This plugin requires Craft CMS 5.0.0 or later.
 
 ## Installation
 
