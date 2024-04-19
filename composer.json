@@ -2,7 +2,7 @@
   "name": "nystudio107/craft-templatecomments",
   "description": "Adds a HTML comment with performance timings to demarcate `{% block %}`s and each Twig template that is included or extended.",
   "type": "craft-plugin",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "keywords": [
     "craftcms",
     "craft-plugin",
@@ -23,6 +23,24 @@
   ],
   "require": {
     "craftcms/cms": "^3.1.29"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main"
+  },
+  "scripts": {
+    "phpstan": "phpstan --ansi --memory-limit=1G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --fix --ansi"
+  },
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
