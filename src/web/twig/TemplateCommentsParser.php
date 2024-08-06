@@ -43,6 +43,8 @@
 
 namespace nystudio107\templatecomments\web\twig;
 
+use nystudio107\templatecomments\helpers\Reflection as ReflectionHelper;
+use ReflectionException;
 use Twig\Environment;
 use Twig\Error\SyntaxError;
 use Twig\ExpressionParser;
@@ -85,10 +87,32 @@ class TemplateCommentsParser extends Parser
     private $traits;
     private $embeddedTemplates = [];
     private $varNameSalt = 0;
+    private $expressionParserClass;
 
     public function __construct(Environment $env)
     {
         $this->env = $env;
+        // Get the existing parser object used by the Twig $env
+        try {
+            $parserReflection = ReflectionHelper::getReflectionProperty($env, 'parser');
+        } catch (ReflectionException $e) {
+            return;
+        }
+        $parserReflection->setAccessible(true);
+        $parser = $parserReflection->getValue($env);
+        if ($parser === null) {
+            return;
+        }
+        // Get the expression parser used by the current parser
+        try {
+            $expressionParserReflection = ReflectionHelper::getReflectionProperty($parser, 'expressionParser');
+        } catch (ReflectionException $e) {
+            return;
+        }
+        // Preserve the existing expression parser and use it
+        $expressionParserReflection->setAccessible(true);
+        $expressionParser = $expressionParserReflection->getValue($parser);
+        $this->expressionParserClass = get_class($expressionParser);
     }
 
     public function getVarName(): string
@@ -108,7 +132,7 @@ class TemplateCommentsParser extends Parser
         }
 
         if (null === $this->expressionParser) {
-            $this->expressionParser = new ExpressionParser($this, $this->env);
+            $this->expressionParser = new $this->expressionParserClass($this, $this->env);
         }
 
         $this->stream = $stream;

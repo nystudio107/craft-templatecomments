@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 4.0.2 - 2024.08.06
+### Fixed
+* Fixed an issue where Template Comments would cause the Craft Closure `^1.0.6` package to not work
+
 ## 4.0.1 - 2024.04.18
 ### Added
 * Added support for template comments for `{% include %}` and `{% extends %}` back into the plugin ([#40](https://github.com/nystudio107/craft-templatecomments/issues/40))
