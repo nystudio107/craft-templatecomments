@@ -92,6 +92,7 @@ class TemplateCommentsParser extends Parser
     public function __construct(Environment $env)
     {
         $this->env = $env;
+        $this->expressionParserClass = ExpressionParser::class;
         // Get the existing parser object used by the Twig $env
         try {
             $parserReflection = ReflectionHelper::getReflectionProperty($env, 'parser');
