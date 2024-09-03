@@ -355,6 +355,11 @@ class TemplateCommentsParser extends Parser
         $this->parent = $parent;
     }
 
+    public function hasInheritance()
+    {
+        return $this->parent || 0 < count($this->traits);
+    }
+
     public function getStream(): TokenStream
     {
         return $this->stream;
