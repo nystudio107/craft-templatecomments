@@ -21,6 +21,7 @@ use Twig\Node\Node;
 use Twig\Node\PrintNode;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
+use function sprintf;
 
 /**
  * Marks a section of a template as being reusable.
@@ -34,14 +35,11 @@ use Twig\TokenParser\AbstractTokenParser;
  */
 final class CommentBlockTokenParser extends AbstractTokenParser
 {
-    public function parse(Token $token): BlockReferenceNode
+    public function parse(Token $token): Node
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
-        $name = $stream->expect(/* Twig_Token::NAME_TYPE */ 5)->getValue();
-        if ($this->parser->hasBlock($name)) {
-            throw new SyntaxError(sprintf("The block '%s' has already been defined line %d.", $name, $this->parser->getBlock($name)->getTemplateLine()), $stream->getCurrent()->getLine(), $stream->getSourceContext());
-        }
+        $name = $stream->expect(Token::NAME_TYPE)->getValue();
 
         // Exclude certain blocks from being CommentBlockNodes
         $blockClass = CommentBlockNode::class;
@@ -52,32 +50,31 @@ final class CommentBlockTokenParser extends AbstractTokenParser
             }
         }
 
-        $this->parser->setBlock($name, $block = new $blockClass($name, new Node(array()), $lineno));
+        $this->parser->setBlock($name, $block = new $blockClass($name, new Node([]), $lineno));
         $this->parser->pushLocalScope();
         $this->parser->pushBlockStack($name);
 
-        if ($stream->nextIf(/* Twig_Token::BLOCK_END_TYPE */ 3) !== null) {
-            $body = $this->parser->subparse(fn(Token $token): bool => $this->decideBlockEnd($token), true);
-            if (($token = $stream->nextIf(/* Twig_Token::NAME_TYPE */ 5)) !== null) {
+        if ($stream->nextIf(Token::BLOCK_END_TYPE)) {
+            $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+            if ($token = $stream->nextIf(Token::NAME_TYPE)) {
                 $value = $token->getValue();
 
-                if ($value !== $name) {
+                if ($value != $name) {
                     throw new SyntaxError(sprintf('Expected endblock for block "%s" (but "%s" given).', $name, $value), $stream->getCurrent()->getLine(), $stream->getSourceContext());
                 }
             }
         } else {
-            $body = new Node(array(
+            $body = new Node([
                 new PrintNode($this->parser->getExpressionParser()->parseExpression(), $lineno),
-            ));
+            ]);
         }
-
-        $stream->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
         $block->setNode('body', $body);
         $this->parser->popBlockStack();
         $this->parser->popLocalScope();
 
-        return new BlockReferenceNode($name, $lineno, $this->getTag());
+        return new BlockReferenceNode($name, $lineno);
     }
 
     public function decideBlockEnd(Token $token): bool
