@@ -57,6 +57,7 @@ class CommentBlockNode extends BlockNode
 
         $compiler
             ->subcompile($this->getNode('body'))
+            ->write("return; yield '';\n") // needed when body doesn't yield anything
             ->outdent();
         if (!in_array($this->blockName, $this->excludeBlocks, false)) {
             $compiler

@@ -1,7 +1,11 @@
 # Template Comments Changelog
 
-## 5.0.2 - 2024.09.03
+## 5.0.3 - 2024.09.06
+###  Changed
+* Template Comments now requires `craftcms/cms` `^5.4.0` going forward, because of the addition of breaking changes in the version of Twig that it requires
+
 ### Fixed
+* Fixed an issue with a change in Twig `3.12.0` (which is now used by Craft `5.4.0`) which would cause an exception to be thrown when rendering templates with an empty `{% block %}` tag ([#46](https://github.com/nystudio107/craft-templatecomments/issues/46))
 * Fixed an issue with a change in Twig `3.12.0` (which is now used by Craft `5.4.0`) which would cause an exception to be thrown when rendering templates ([#44](https://github.com/nystudio107/craft-templatecomments/issues/44))
 
 ## 5.0.1 - 2024.08.06
