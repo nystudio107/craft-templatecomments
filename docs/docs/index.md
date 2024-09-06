@@ -34,15 +34,15 @@ It also records performance data, so you know how much overhead each `{% block %
 
 With more complicated "content builder" setups, this can help bring clarity to where the various HTML on your pages is coming from.
 
-This can be especially handy when dealing with OPC (Other People's Code). It solves [this problem](https://craftcms.stackexchange.com/questions/27769/how-can-i-print-the-name-of-every-template-being-rendered-in-html-comments-when).
+This can be especially handy when dealing with OPC (Other People’s Code). It solves [this problem](https://craftcms.stackexchange.com/questions/27769/how-can-i-print-the-name-of-every-template-being-rendered-in-html-comments-when).
 
 ![Screenshot](./resources/screenshots/templatecomments-example.png)
 
 ## Configuring Template Comments
 
-All configuration is done via the `config.php`. For it to work, you'll need to copy it to your `craft/config/` directory, and rename it `templatecomments.php`
+All configuration is done via the `config.php`. For it to work, you’ll need to copy it to your `craft/config/` directory, and rename it `templatecomments.php`
 
-Here's what the default settings look like:
+Here’s what the default settings look like:
 
 ```php
 return [
@@ -85,9 +85,9 @@ return [
 
 ## Using Template Comments
 
-Nothing much to say here; install the plugin, and it "just works". If `devMode` is off, it doesn't even install itself, so there should be zero effect in production.
+Nothing much to say here; install the plugin, and it "just works". If `devMode` is off, it doesn’t even install itself, so there should be zero effect in production.
 
-The `<<< END <<<` comments all include performance data in milliseconds, e.g.:
+The `<<< END <<<` comments all include performance data in milliseconds, for example:
 ```html
 <!-- 22.34ms <<< TEMPLATE END <<< templatecomments/_layout.twig -->
 ```
