@@ -1,6 +1,6 @@
 # Template Comments Changelog
 
-## 4.0.3 - UNRELEASED
+## 4.0.3 - 2024.09.06
 ###  Changed
 * Template Comments now requires `craftcms/cms` `^4.12.0` going forward, because of the addition of breaking changes in the version of Twig that it requires
 
