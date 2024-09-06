@@ -28,9 +28,9 @@ class CommentBlockNode extends BlockNode
 
     private array $excludeBlocks = ['attr'];
 
-    public function __construct(string $name, Node $body, int $lineno, string $tag = null)
+    public function __construct(string $name, Node $body, int $lineno)
     {
-        parent::__construct($name, $body, $lineno, $tag);
+        parent::__construct($name, $body, $lineno);
         $this->blockName = $name;
     }
 
