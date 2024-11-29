@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 4.0.4 - 2024.11.29
+###  Changed
+* Defer installing Template Comments until Craft is fully setup, to avoid a "Twig instantiated before Craft is fully initialized" warning ([#50](https://github.com/nystudio107/craft-templatecomments/issues/50))
+
 ## 4.0.3 - 2024.09.06
 ###  Changed
 * Template Comments now requires `craftcms/cms` `^4.12.0` going forward, because of the addition of breaking changes in the version of Twig that it requires
