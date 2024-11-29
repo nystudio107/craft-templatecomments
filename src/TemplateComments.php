@@ -72,11 +72,22 @@ class TemplateComments extends Plugin
         /** @var ?Settings $settings */
         $settings = $this->getSettings();
         self::$settings = $settings;
-        // Add in our Craft components
-        $this->addComponents();
-        // Install our global event handlers
-        $this->installEventListeners();
-
+        // Unfortunately, Craft::$app->onInit only exists in Craft 4.3.5 and later so check for it
+        // https://github.com/craftcms/cms/blob/4.x/CHANGELOG.md#435---2022-12-13
+        if (method_exists(Craft::$app, 'onInit')) {
+            // Defer some setup tasks until Craft is fully initialized:
+            Craft::$app->onInit(function() {
+                // Add in our Craft components
+                $this->addComponents();
+                // Install our global event handlers
+                $this->installEventListeners();
+            });
+        } else {
+            // Add in our Craft components
+            $this->addComponents();
+            // Install our global event handlers
+            $this->installEventListeners();
+        }
         Craft::info(
             Craft::t(
                 'templatecomments',
