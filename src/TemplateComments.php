@@ -72,10 +72,13 @@ class TemplateComments extends Plugin
         /** @var ?Settings $settings */
         $settings = $this->getSettings();
         self::$settings = $settings;
-        // Add in our Craft components
-        $this->addComponents();
-        // Install our global event handlers
-        $this->installEventListeners();
+        // Defer some setup tasks until Craft is fully initialized:
+        Craft::$app->onInit(function() {
+            // Add in our Craft components
+            $this->addComponents();
+            // Install our global event handlers
+            $this->installEventListeners();
+        });
 
         Craft::info(
             Craft::t(
