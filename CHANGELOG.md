@@ -3,7 +3,7 @@
 ## 5.0.6 - UNRELEASED
 ###  Changed
 * Template Comments now requires `craftcms/cms` `^5.9.0` going forward, because of the addition of breaking changes in the version of Twig that it requires ([#52](https://github.com/nystudio107/craft-templatecomments/issues/52))
-* Updated `TemplateCommentsParser.php` to match Twig `3.15.x`'s `Parser` ([#52](https://github.com/nystudio107/craft-templatecomments/issues/52))
+* Updated `TemplateCommentsParser.php` to match Twig `3.23.x`'s `Parser` ([#52](https://github.com/nystudio107/craft-templatecomments/issues/52))
 
 ## 5.0.5 - 2026.01.29
 ###  Changed
