@@ -1,5 +1,9 @@
 # Template Comments Changelog
 
+## 5.0.7 - UNRELEASED
+###  Fixed
+* Fix for Twig >= `3.27` which leaves expressionParser null until the first `parse()` ([#53](https://github.com/nystudio107/craft-templatecomments/issues/53))
+
 ## 5.0.6 - 2026.01.30
 ###  Changed
 * Template Comments now requires `craftcms/cms` `^5.9.0` going forward, because of the addition of breaking changes in the version of Twig that it requires ([#52](https://github.com/nystudio107/craft-templatecomments/issues/52))
