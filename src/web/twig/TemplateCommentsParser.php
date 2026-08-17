@@ -132,6 +132,10 @@ class TemplateCommentsParser extends Parser
         // Preserve the existing expression parser and use it
         $expressionParserReflection->setAccessible(true);
         $expressionParser = $expressionParserReflection->getValue($parser);
+        // Twig >= 3.27 leaves expressionParser null until the first parse()
+        if ($expressionParser === null) {
+            return;
+        }
         $this->expressionParserClass = get_class($expressionParser);
         // ### END PATCH ###
     }
